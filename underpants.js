@@ -21,6 +21,9 @@ var _ = {};
 *   _.identity({a: "b"}) === {a: "b"}
 */
 
+_.identity = function(value){
+    return value;
+}
 
 /** _.typeOf
 * Arguments:
@@ -41,8 +44,16 @@ var _ = {};
 * _.typeOf("javascript") -> "string"
 * _.typeOf([1,2,3]) -> "array"
 */
-
-
+_.typeof = function(value){
+if (value = null){
+    return "null";
+}else if (Array.isArray){
+return "array";
+}else{
+    return typeof value;
+}
+};
+                  
 /** _.first
 * Arguments:
 *   1) An array
@@ -60,7 +71,19 @@ var _ = {};
 *   _.first(["a", "b", "c"], 1) -> "a"
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
+_.first = function(array, number){
+    if(!Array.isArray(array)){
+        return [];
+    }
+if(number === undefined|| typeof number !== "number"){
+    return array[0];
+}
 
+if (number < 0){
+    return [];
+}
+if (number > array.length)
+    return array.slice(0, number); 
 
 /** _.last
 * Arguments:
@@ -309,4 +332,4 @@ if((typeof process !== 'undefined') &&
    (typeof process.versions.node !== 'undefined')) {
     // here, export any references you need for tests //
     module.exports = _;
-}
+   }
